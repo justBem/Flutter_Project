@@ -1,65 +1,64 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+
+class DiceApp extends StatefulWidget {
+  const DiceApp({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<DiceApp> createState() => _DiceAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _DiceAppState extends State<DiceApp> {
+  List<String> words = ['one', 'two', 'three', 'four', 'five', 'six'];
+  String randomWord = '';
+
+  void rollDice() {
+    setState(() {
+      randomWord = selectRandomWord(words);
+    });
+  }
+
+  String selectRandomWord(List<String> words) {
+    Random random = Random();
+    int randomIndex = random.nextInt(words.length);
+    return words[randomIndex];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff056c5c),
+      backgroundColor: Color(0xffFFE93B),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Center(child: Text("Тапшырма 4",
-        style: TextStyle(color: Colors.black),
-        )),
+        title: Center(child: Text("Тапшырма 5")),
         elevation: 0,
-        ),
-        body:Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-            Text("Bermet Kubandykova", 
-            style: TextStyle(fontSize: 48),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: rollDice,
+                    child: Image.asset('images/dice-six-faces-$randomWord.png'),
+                  ),
+                ),
+                const SizedBox(width: 25),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {},
+                    child: Image.asset('images/dice-six-faces-two.png'),
+                  ),
+                ),
+              ],
             ),
-            Text("Flutter developer", style: TextStyle(fontSize: 28),),
-            Container(
-              color: Colors.white,
-              child: TextFormField(
-                style: TextStyle(
-                  fontSize: 20, 
-                  color: Color(0xff056c5c),
-                  fontWeight: FontWeight.w600, ),
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    prefixIcon: Icon(Icons.phone, color: Color(0xff056c5c)),
-
-                  ),
-                  )
-             ),
-             SizedBox(height: 53,),
-              Container(
-              color: Colors.white,
-              child: TextFormField(
-                style: TextStyle(
-                  fontSize: 20, 
-                  color: Color(0xff056c5c),
-                  fontWeight: FontWeight.w600, ),
-                  onChanged: (value) {},
-                   decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    prefixIcon: Icon(Icons.mail, color: Color(0xff056c5c)),
-
-                  ),
-                  )
-             ),
-          ],),
-        )
+          )
+        ],
+      ),
     );
   }
 }
