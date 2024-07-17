@@ -1,6 +1,5 @@
+import 'package:dice_app/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:sabak_4/home.dart';
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -12,11 +11,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         
- 
+      
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const DiceApp(),
     );
   }
 }
